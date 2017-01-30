@@ -28,13 +28,7 @@ namespace RearGate
             guard.Query = duty;
         }
 
-        public static GateGuard Instance
-        {
-            get
-            {
-                return instance ?? (instance = new GateGuard());
-            }
-        }
+        public static GateGuard Instance => instance ?? (instance = new GateGuard());
 
         public GateVisitor Visitor => visitor;
 

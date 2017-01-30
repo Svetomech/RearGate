@@ -18,11 +18,11 @@ namespace RearGate
                 switch (visitor.State)
                 {
                     case VisitorState.Entered:
-                        Console.WriteLine($"Entered {visitor.Name}");
+                        Console.WriteLine($"{visitor.Name} just entered!");
                         break;
 
                     case VisitorState.Left:
-                        Console.WriteLine($"Left {visitor.Name}");
+                        Console.WriteLine($"{visitor.Name} left us.");
                         break;
 
                     default:
