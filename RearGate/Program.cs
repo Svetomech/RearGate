@@ -23,12 +23,12 @@ namespace RearGate
 
                 if (VisitorState.Entered == visitor.State)
                 {
-                    Authorize(ref visitor);
+                    Authorize(visitor);
                 }
             }
         }
 
-        static void Authorize(ref GateVisitor visitor)
+        static void Authorize(GateVisitor visitor)
         {
             string keyLocation = Path.Combine(visitor.Name, _authorizationKey);
 
