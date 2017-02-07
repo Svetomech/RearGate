@@ -2,8 +2,6 @@
 {
     interface IGuard
     {
-        GateVisitor Visitor { get; }
-
         bool IsBusy { get; }
 
         void WakeUp();

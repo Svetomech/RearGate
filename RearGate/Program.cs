@@ -19,32 +19,22 @@ namespace RearGate
             {
                 guard.DoDuty();
 
-                Console.WriteLine(String.Join(" ", visitor.Name, visitor.State));
+                Console.WriteLine(String.Join(" ", visitor.Name, visitor.State));//
 
-                if (VisitorState.Entered == visitor.State)
-                {
-                    Authorize(visitor);
-                }
+                if (visitor.State != VisitorState.Entered) continue;
+
+                Authorize(visitor);
             }
         }
 
-        static void Authorize(GateVisitor visitor)
+        static void Authorize(IVisitor visitor)
         {
             string keyLocation = Path.Combine(visitor.Name, _authorizationKey);
 
-            if (!File.Exists(keyLocation))
-            {
-                return;
-            }
+            if (!File.Exists(keyLocation)) return;
 
-            try
-            {
-                Process.Start(keyLocation);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            try { Process.Start(keyLocation); }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
     }
 }

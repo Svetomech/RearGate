@@ -11,26 +11,24 @@ namespace RearGate
         private ManagementEventWatcher guard;
         private WqlEventQuery duty;
 
-        private GateVisitor visitor;
-
         private GateGuard()
         {
             guard = new ManagementEventWatcher();
             duty = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2 or EventType = 3");
 
-            visitor = new GateVisitor();
+            Visitor = new GateVisitor();
 
             guard.EventArrived += (s, e) =>
             {
-                visitor.Name = e.NewEvent.Properties["DriveName"].Value.ToString();
-                visitor.State = (VisitorState)(Convert.ToInt16(e.NewEvent.Properties["EventType"].Value));
+                Visitor.Name = e.NewEvent.Properties["DriveName"].Value.ToString();
+                Visitor.State = (VisitorState) Convert.ToInt16(e.NewEvent.Properties["EventType"].Value);
             };
             guard.Query = duty;
         }
 
         public static GateGuard Instance => instance ?? (instance = new GateGuard());
 
-        public GateVisitor Visitor => visitor;
+        public GateVisitor Visitor { get; private set; }
 
         public bool IsBusy { get; private set; }
 
@@ -45,8 +43,7 @@ namespace RearGate
         {
             guard.WaitForNextEvent();
 
-            // Give EventArrived time to update visitor
-            Thread.Sleep(1);
+            Thread.Sleep(1); // give EventArrived time to update Visitor
         }
 
         public void GoToBed()
