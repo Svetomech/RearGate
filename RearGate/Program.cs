@@ -19,7 +19,7 @@ namespace RearGate
             {
                 guard.DoDuty();
 
-                Console.WriteLine(String.Join(" ", visitor.Name, visitor.State));//
+                Console.WriteLine(visitor.Name + visitor.State);
 
                 if (visitor.State != VisitorState.Entered) continue;
 
