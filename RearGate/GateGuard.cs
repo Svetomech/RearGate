@@ -43,7 +43,7 @@ namespace RearGate
         {
             guard.WaitForNextEvent();
 
-            Thread.Sleep(1); // give EventArrived time to update Visitor
+            Thread.Sleep(2); // give EventArrived time to update Visitor
         }
 
         public void GoToBed()
